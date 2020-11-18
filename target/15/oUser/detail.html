@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XX外卖</title>
+    <!-- jquery  -->
+    <script src="./statci/js/jquery.min.js"></script>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="./statci/css/bootstrap.css">
+    <!-- title图片 -->
+    <link rel="shortcut icon" href="./statci/img/购物车 (1).png" />　
+    <!-- 瀑布流css -->
+    <link rel="stylesheet" href="./statci/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,600|Open+Sans:300,600" rel="stylesheet">
+    <!-- 瀑布流css -->
+    <link rel="stylesheet" href="./statci/dist/sortable.min.css">
+    <!-- 首页部分css -->
+    <link rel="stylesheet" href="./statci/css/first.css">
+    <script type="text/javascript" src="./statci/dist/sortable.min.js"></script>
+    <link rel="stylesheet" href="./statci/css/search-form.css">
+    <link rel="stylesheet" href="./statci/css/detail.css">
+    <!-- 引入css 初始化的css 文件 -->
+    <link rel="stylesheet" href="./statci/css/buycarbase.css">
+    <!-- 引入公共样式的css 文件 -->
+    <link rel="stylesheet" href="./statci/css/buycarcommon.css">
+    <!-- JSON部分   -->
+    <link href="./statci/css/personal.css" rel="stylesheet" type="text/css">
+
+    <script src="./statci/js/handlebars-v4.7.6.js"></script>
+    <script src="./statci/js/json3.js"></script>
+    <script src="statci/js/include.js"></script>
+
+    <script>
+        $(function () {
+            $.get("../UserServlet/finUserName", function (data) {
+                if (data == null) {
+                    $('#a_username').html("欢迎登录");
+                    $("#quit").hide();
+                    $("#regiseter").show();
+                } else {
+                    $("#quit").show();
+                    $("#regiseter").hide();
+                    $('#a_username').html(data.userName);
+                    $('#userIdd').html(data.userId);
+                    $('#userIdd').hide();
+                    console.log($('#userIdd').html());
+                }
+            })
+        })
+    </script>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!--    <div id="header" style="margin-top: -17px"></div>-->
+
+    <!-- 顶部快捷导航start -->
+    <div class="shortcut" style="margin-top: -17px;">
+        <div class="shortcut">
+            <div class="w">
+                <div class="fl">
+                    <ul>
+                        <li>XX外卖欢迎您！ </li>
+                        <li>
+                            <a href="./statci/login.html" id="a_username">请登录</a>
+                            <a href="register.html" class="style-red" id="regiseter">免费注册</a>
+                            <a href="../UserServlet/UserQuit" id="quit">退出登录</a>
+                            <a href="javascript:;" id="userIdd"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fr">
+                    <ul>
+                        <li><a href="#">我的订单</a></li>
+                        <li class="spacer"></li>
+                        <li>
+                            <a href="#">我的外卖</a>
+
+                        </li>
+                        <li class="spacer"></li>
+                        <li><a href="#">XX外卖会员</a></li>
+                        <li class="spacer"></li>
+                        <li><a href="#">企业采购</a></li>
+                        <li class="spacer"></li>
+                        <li><a href="#">关注我们</a></li>
+                        <li class="spacer"></li>
+                        <li><a href="#">客户服务</a> </li>
+                        <li class="spacer"></li>
+                        <li><a href="#">网站导航</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="height: 130px; padding-top: 13px;">
+        <div class="nav white">
+            <div class="logoBig">
+                <li><img src="./statci/img/logo1.png" /></li>
+            </div>
+
+            <div class="search-bar pr">
+                <a name="index_none_header_sysc" href="#"></a>
+                <form>
+                    <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索"
+                        autocomplete="off">
+                    <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" onclick="s() ">
+                    <script>
+                        function s() {
+                            if ($('#searchInput').val() == '') {
+                                $('#searchInput').focus();
+                            } else {
+                                location.href = "serch.html?foodName=" + $('#searchInput').val()
+                            }
+                        }
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 顶部快捷导航end  -->
+    <!--搜索框-->
+    <!--    <div id="searchh" style="margin-top: -20px">-->
+    <!--        <div class="w my-search text-center">-->
+
+    <!--            <div class="my-serch-left">-->
+    <!--                <a href=""><img src="./statci/img/logo1.png" alt="" class="my-logo"></a>-->
+    <!--            </div>-->
+    <!--            <div class="my-serch-center">-->
+    <!--                <div class="input-group">-->
+    <!--                    <input type="text" class="form-control" placeholder="外卖.............."-->
+    <!--                        style="height: 46px !important;">-->
+    <!--                    <span class="input-group-btn">-->
+    <!--                        <button class="btn btn-success btn-lg" type="button"-->
+    <!--                            style="height: 46px !important;">搜索</button>-->
+    <!--                    </span>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="my-serch-left">-->
+    <!--                <a href=""><img src="./statci/img/二维码图片_4月13日11时44分24秒.png" alt="" class="my-logo"></a>-->
+    <!--            </div>-->
+
+    <!--        </div>-->
+    <!--    </div>-->
+    <hr class="w">
+    <div class="w" style="height: 40px; background-color: rgb(242,242,242);">
+        <a href="">
+            <h2 style="margin-top: 1px !important; float: right; margin-right: 100px;">店铺名</h2>
+        </a>
+    </div>
+    <!-- 产品介绍模块 -->
+    <div class=" product_intro  w wes">
+
+    </div>
+    <hr class="w">
+    <div class="product_intro  w">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                    data-toggle="tab">商品详情</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">商品评价</a>
+            </li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">关于我们</a>
+            </li>
+        </ul>
+        <style>
+            .comment-0 {
+
+                margin: 15px 20px 13px 50px;
+            }
+
+            .comment-star {
+                width: 78px;
+                height: 14px;
+                background: url(//static.360buyimg.com/item/unite/1.0.98/components/default/comment/i/star.png) no-repeat;
+
+            }
+
+            .star5 {
+                background-position: -0px 0;
+            }
+
+            .star3 {
+                background-position: -32px 0;
+            }
+
+            .star1 {
+                background-position: -64px 0;
+            }
+
+            .comment-con {
+                font-size: 14px;
+                padding: 10px 0;
+                line-height: 180%;
+                color: #333;
+
+            }
+
+            .recomment-con {
+                font-size: 14px;
+                margin-top: 12px;
+                border-top: 1px solid #f0f0f0;
+            }
+
+            .recomment {
+                padding: 12px 0 5px;
+                color: #ff561c;
+                line-height: 170%;
+            }
+        </style>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane " id="home">商品详情</div>
+            <div role="tabpanel" class="tab-pane active" id="profile">
+                <div class="comment-0">
+                    <div class="comment-star star3"></div>
+                    <p class="comment-con">
+                    <p>评价内容</p>
+                    </p>
+                    <div class="recomment-con">
+                        <dl class="recomment">
+                            <dt>商家 回复：</dt>
+                            <dd>您好，感谢您在的购物及评价，
+                            </dd>
+                        </dl>
+                    </div>
+                    <hr>
+                </div>
+                <div class="comment-0">
+                    <div class="comment-star star1"></div>
+
+                    <p class="comment-con">
+                    <p>评价内容</p>
+                    </p>
+
+                    <div class="recomment-con">
+                        <dl class="recomment">
+                            <dt>商家 回复：</dt>
+                            <dd>您好，感谢您在的购物及评价，
+                            </dd>
+                        </dl>
+                    </div>
+                    <hr>
+
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="messages">关于我们</div>
+
+        </div>
+
+    </div>
+    <!-- 返回顶部 -->
+    <div class="back">
+        <img src="./statci/img/返回顶部 (4).png" alt="">
+    </div>
+    <script src="statci/js/bootstrap.min.js"></script>
+    <!-- 鼠标滚动 -->
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(document).scrollTop() >= 100) {
+                    $(".back").fadeIn();
+                } else {
+                    $(".back").fadeOut();
+                }
+                $(".back").click(function () {
+                    $("body, html").stop().animate({
+                        scrollTop: 0
+                    });
+                })
+            })
+        })
+        function addfun() {
+            $('.reduce').removeClass('.reduce1')
+            $('.buycarnum').val(parseInt($('.buycarnum').val()) + 1)
+        }
+        function reducefun() {
+            if ($('.buycarnum').val() > 1) {
+                $('.buycarnum').val(parseInt($('.buycarnum').val()) - 1)
+            } else {
+            }
+        }
+    </script>
+
+    <!-- 数据渲染模板 -->
+    <script type="text/template" id="tbody-tr">
+        {{#each this}}
+        <div class="preview_wrap ">
+            <div class="preview_img">
+                <img src=".{{foodPic}}" alt="">
+                <div class="mask"></div>
+            </div>
+        </div>
+        <div style="height: 15px;"></div>
+            <div class="sku_name foodName">
+                {{foodName}}
+            </div>
+            <div style="height: 15px;"></div>
+            <div class="news foodInfo">
+                {{foodInfo}}
+            </div>
+            <div style="height: 15px;"></div>
+            <div class="summary">
+                <dl class="summary_price">
+                    <dt>价格</dt>
+                    <dd>
+                        <i class="price foodPrice">￥{{foodPrice}} </i>
+                        <a href="#">降价通知</a>
+                        <div class="remark">累计评价<div class="remarknum"></div></div>
+                    </dd>
+                </dl>
+                <div style="height: 15px;"></div>
+                <dl class="summary_support">
+                    <dt>支持</dt>
+                    <dd>到店取餐 </dd>
+                </dl>
+                <dl class="choose_color">
+                    <dt>套餐</dt>
+                    <dd>
+                        <a href="javascript:;" class="current">默认套餐</a>
+                    </dd>
+                </dl>
+                <div class="choose_btns">
+                    <div class="choose_amount">
+                        <input type="text" value="1" class="buycarnum">
+                        <a href="javascript:;" class="add" onclick="addfun()">+</a>
+                        <a href="javascript:;" class="reduce " onclick="reducefun()">-</a>
+                    </div>
+                    <a href="javascript:;" class="addcar"  data-userId="" onclick="addToCar()">加入购物车</a>
+                </div>
+            </div>
+        {{/each}}
+    </script>
+    <script type="text/template" id="tbody-tr21">
+        {{#each this}}
+            <div class="comment-0">
+                <div class="comment-star ">{{reviewsLv}}</div>
+                <p class="comment-con"><p>{{reviewsInfo}}</p></p>
+                <div class="recomment-con">
+                    <dl class="recomment">
+                        <dt>商家 回复：</dt>
+                         <dd>{{bizReply}}
+                         </dd>
+                    </dl>
+                </div>
+                 <hr>
+            </div>
+        {{/each}}
+    </script>
+    <!--  截取传过来的数据  -->
+
+    <!-- 数据添加模块 -->
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+        var fooId = getQueryString("foodId");
+
+
+        $(function () {
+            var tpl = $('#tbody-tr').html();
+            var template = Handlebars.compile(tpl);
+            $.post("../FoodServlet/foodSe", { "foodId": fooId }, function (data) {
+                var obj = JSON.parse(data);
+                console.log(data)
+                $(".wes").html(template(obj));
+                // console.log("查询·完毕")
+                $.post("../UserServlet/finUserName", function (data) {
+                    if (data == null) {
+                        $('#a_username').html("欢迎登录")
+                        $('.addcar').attr('href', "./statci/login.html")
+                    } else {
+                        console.log(data)
+                        $('.addcar').data('userId', data.userId)
+
+                    }
+                })
+            });
+
+
+        })
+        function addToCar() {
+            //需要获取用户ID foodId foodNum;
+            var userId = $('#userIdd').html();
+            var foodNum = $('.buycarnum').val();
+            console.log(userId + "----------" + foodNum + "---------" + fooId);
+            $.post("../UserServlet/addToCar", { "userId": userId, "foodNum": foodNum, "foodId": fooId }, function (d) {
+                if (d) {
+                    location.href = 'buycar.html';
+                } else {
+                    alert('添加失败');
+                }
+
+            })
+
+        }
+        var tpl1 = $('#tbody-tr21').html();
+        var template1 = Handlebars.compile(tpl1);
+
+        $.post("../FoodServlet/FoodReviews", { "foodId": fooId }, function (data) {
+            console.log(data)
+            var l=data.length;
+
+
+            if (data != null) {
+                console.log(11)
+                $('.remarknum').val(l);
+                $("#profile").html(template1(data));
+                $('.comment-star').each(function () {
+                    if ($(this).html() == "好评") {
+                        $(this).html('')
+                        $(this).addClass("star5")
+                    }
+                    if ($(this).html() == "中评") {
+                        $(this).html('')
+                        $(this).addClass("star3")
+                    }
+                    if ($(this).html() == "差评") {
+                        $(this).html('')
+                        $(this).addClass("star1")
+                    }
+                })
+            }
+
+        })
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>订餐系统商家后台</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="./css/font.css">
+    <!--     <link rel="shortcut icon" href="./images/购物车 (1).png" />　-->
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <!--    <link rel="stylesheet" href="./css/theme5.css">-->
+    <script src="js/jquery.min.js"></script>
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script>
+            // 是否开启刷新记忆tab功能
+            // var is_remember = false;
+    </script>
+    <style>
+        .avatar {
+            width: 35px;
+            height: 35px;
+            background-color: pink;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .avatar img {
+            width: 100%;
+            margin-top: -10px;
+        }
+
+        .my-iframe {
+            border: 0px;
+        }
+    </style>
+    <script>
+        $(function () {
+            var s=window.localStorage;
+            $.get("../BizServlet/finBizName", function (data) {
+                console.log("这是查找session结果" + data)
+                if (data == null) {
+                    location.href = 'login.html'
+
+                } else {
+                    s.removeItem("bizInfo");
+                    s["bizInfo"] = JSON.stringify(data);
+
+                    $.post("../BizServlet/report_for_biz",{bizId:data.bizId},function (report) {
+                        s["biz_report"]=JSON.stringify(report);
+                    })
+                    $('#a_username').html(data.bizName)
+                }
+
+
+            })
+        })
+    </script>
+</head>
+
+<body class="index">
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo">
+            <a href="./index.html">订餐系统商家后台</a></div>
+        <div class="left_open">
+            <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
+        </div>
+        <ul class="layui-nav right" lay-filter="">
+            <li class="layui-nav-item">
+                <div class="avatar">
+                    <img src="./images/头像.jpg" alt="">
+                </div>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;" id="a_username"></a>
+                <dl class="layui-nav-child">
+                    <!-- 二级菜单 -->
+                    <dd>
+                        <a onclick="xadmin.open('个人信息','bizInfo-edit.html',1000,400)">个人信息</a></dd>
+                    <dd>
+                        <a href="../BizServlet/BizQuit">切换帐号</a></dd>
+                    <dd>
+                        <a href="../BizServlet/BizQuit">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item to-index">
+                <a href="/">前台首页</a></li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+        <div id="side-nav">
+            <ul id="nav">
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont left-nav-li" lay-tips="顾客管理">&#xe6b8;</i>
+                        <cite>数据管理</cite>
+                        <i class="iconfont nav_right">&#xe697;</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a onclick="xadmin.add_tab('统计页面','welcome1.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>统计页面</cite></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
+                        <cite>订单管理</cite>
+                        <i class="iconfont nav_right">&#xe697;</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>订单列表</cite></a>
+                        </li>
+                        <li>
+                            <a onclick="xadmin.add_tab('订单列表','reviews-list.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>评价列表</cite></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont left-nav-li" lay-tips="商品管理">&#xe6f6;</i>
+                        <cite>商品管理</cite>
+                        <i class="iconfont nav_right">&#xe697;</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a onclick="xadmin.add_tab('商品列表','food-list.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>商品列表</cite></a>
+                        </li>
+
+                        <li>
+                            <a onclick="xadmin.add_tab('增加商品','food-add.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>增加商品</cite></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="iconfont left-nav-li" lay-tips="营销管理">&#xe70c;</i>
+                        <cite>营销管理</cite>
+                        <i class="iconfont nav_right">&#xe697;</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a onclick="xadmin.add_tab('申请营销','market-list.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>申请营销</cite></a>
+                        </li>
+                        <li>
+                            <a onclick="xadmin.add_tab('待审核列表','market-examine-list.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>待审核列表</cite></a>
+                        </li>
+                        <li>
+                            <a onclick="xadmin.add_tab('营销列表','market-list1.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>营销列表</cite></a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li>
+                    <a href="javascript:;">
+                        <i class="iconfont left-nav-li" lay-tips="其它页面">&#xe6b4;</i>
+                        <cite>其它页面</cite>
+                        <i class="iconfont nav_right">&#xe697;</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="login.html" target="_blank">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>登录页面</cite></a>
+                        </li>
+                        <li>
+                            <a onclick="xadmin.add_tab('错误页面','error.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>错误页面</cite></a>
+                        </li>
+                        <li>
+                            <a onclick="xadmin.add_tab('示例页面','demo.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>示例页面</cite></a>
+                        </li>
+                        <li>
+                            <a onclick="xadmin.add_tab('更新日志','log.html')">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>更新日志</cite></a>
+                        </li>
+                    </ul>
+                </li> -->
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li class="home">
+                    <i class="layui-icon">&#xe68e;</i>我的桌面</li>
+            </ul>
+            <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                <dl>
+                    <dd data-type="this">关闭当前</dd>
+                    <dd data-type="other">关闭其它</dd>
+                    <dd data-type="all">关闭全部</dd>
+                </dl>
+            </div>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src='./welcome1.html' frazhumeborder="0" scrolling="yes" class="x-iframe my-iframe"></iframe>
+                </div>
+            </div>
+            <div id="tab_show"></div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+    <style id="theme_style"></style>
+    <!-- 右侧主体结束 -->
+    <!-- 中部结束 -->
+
+
+
+</body>
+
+</html>

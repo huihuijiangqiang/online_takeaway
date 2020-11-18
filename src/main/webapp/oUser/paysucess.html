@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="statci/js/jquery.min.js"></script>
+</head>
+<body>
+<h1>支付成功 跳转中请稍后.....</h1>
+<script>
+    function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+    var orderInfo=getQueryString("out_trade_no");
+    $.post("../OrderServlet/changeOrderStatus",{orderInfo:orderInfo},function (d) {
+        if (d){
+            setTimeout(location.href="../person/index.html",3000)
+
+        }else {
+            $("html").append("<h1>跳转失败.....</h1>")
+        }
+
+
+    })
+</script>
+</body>
+</html>

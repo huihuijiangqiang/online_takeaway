@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body ">
+                        <blockquote class="layui-elem-quote">欢迎登录：
+                            <span class="x-red"></span><span> 现在时间是 </span><span id="time"></span>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">数据统计</div>
+                    <div class="layui-card-body ">
+                        <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+                            <li class="layui-col-md2 layui-col-xs6">
+                                <a href="javascript:;" class="x-admin-backlog-body">
+                                    <h3>商家数</h3>
+                                    <p>
+                                        <cite class="bizNum">66</cite></p>
+                                </a>
+                            </li>
+                            <li class="layui-col-md2 layui-col-xs6">
+                                <a href="javascript:;" class="x-admin-backlog-body">
+                                    <h3>商品数</h3>
+                                    <p>
+                                        <cite class="foodNum">12</cite></p>
+                                </a>
+                            </li>
+                            <li class="layui-col-md2 layui-col-xs6">
+                                <a href="javascript:;" class="x-admin-backlog-body">
+                                    <h3>订单数</h3>
+                                    <p>
+                                        <cite class="orderNum">99</cite></p>
+                                </a>
+                            </li>
+                            <li class="layui-col-md2 layui-col-xs6">
+                                <a href="javascript:;" class="x-admin-backlog-body">
+                                    <h3>评价数</h3>
+                                    <p>
+                                        <cite class="reviewNum">67</cite></p>
+                                </a>
+                            </li>
+                            <li class="layui-col-md2 layui-col-xs6">
+                                <a href="javascript:;" class="x-admin-backlog-body">
+                                    <h3>用户数</h3>
+                                    <p>
+                                        <cite class="userNum">67</cite></p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 图表开始 -->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body ">
+
+                        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+                        <div id="main" style="width: 80%;height:400px;"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        s = window.localStorage;
+        var a1, a2;
+        $.post("../AdminServlet/report_forms", function (result) {
+            s.removeItem("re_list");
+            s["re_list"] = JSON.stringify(result);
+
+        })
+        $.post("../AdminServlet/order_amount", function (result) {
+            s.removeItem("r_list");
+            s["r_list"] = JSON.stringify(result);
+        })
+        //编写时使用 程序上线时注销------------------
+
+        var a1 = JSON.parse(s.re_list);
+        var a2 = JSON.parse(s.r_list);
+
+        //时间转换函数
+        function add0(m) { return m < 10 ? '0' + m : m }
+
+        function format(timestamp) {
+            //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+            var time = new Date(timestamp);
+
+            var month = time.getMonth() + 1;
+            var date = time.getDate();
+
+            return add0(month) + '-' + add0(date);
+        }
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+
+        $('.userNum').html(a1[a1.length-1].userNum);
+        $('.reviewNum').html(a1[a1.length-1].reviewNum);
+        $('.foodNum').html(a1[a1.length-1].foodNum);
+        $('.orderNum').html(a1[a1.length-1].orderNum);
+        $('.bizNum').html(a1[a1.length-1].bizNum);
+
+        bizdata = [];
+        userdata = [];
+        revdata = [];
+        fooddata = [];
+        orderdata = [];
+        timedata = []
+        for (var i = 0; i < a1.length; i++) {
+            timedata.push(format(a1[i].rtime))
+            userdata.push(a1[i].userNum);
+            bizdata.push(a1[i].bizdata);
+            revdata.push(a1[i].reviewNum);
+            fooddata.push(a1[i].foodNum);
+            orderdata.push(a1[i].orderNum);
+        }
+        console.log(orderdata)
+        // 指定图表的配置项和数据
+        /*var option = {
+            title: {
+                text: '用户数据统计'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['商家', '商品', '订单', '评价', '用户']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: timedata
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '商家',
+                    type: 'line',
+                    stack: '总量',
+                    data: bizdata
+                },
+                {
+                    name: '商品',
+                    type: 'line',
+                    stack: '总量',
+                    data: fooddata
+                },
+                {
+                    name: '订单',
+                    type: 'line',
+                    stack: '总量',
+                    data: orderdata
+                },
+                {
+                    name: '评价',
+                    type: 'line',
+                    stack: '总量',
+                    data: revdata
+                },
+                {
+                    name: '用户',
+                    type: 'line',
+                    stack: '总量',
+                    data: userdata
+                }
+            ]
+        };*/
+        var option = {
+            title: {
+                text: '最近20天网站数据变化'
+            },
+            legend: {
+                data: ['商家数', '用户数', '评价数', '食品数', '订单数']
+            },
+            toolbox: {
+                // y: 'bottom',
+                feature: {
+                    magicType: {
+                        type: ['stack', 'tiled']
+                    },
+                    dataView: {},
+                    saveAsImage: {
+                        pixelRatio: 2
+                    }
+                }
+            },
+            tooltip: {},
+            xAxis: {
+                data: timedata,
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+            },
+            /*bizdata = [];
+        userdata = [];
+        revdata = [];
+        fooddata = [];
+        orderdata = [];*/
+            series: [{
+                name: '商家数',
+                type: 'bar',
+                data: bizdata,
+                animationDelay: function (idx) {
+                    return idx * 10;
+                }
+            }, {
+                name: '用户数',
+                type: 'bar',
+                data: userdata,
+                animationDelay: function (idx) {
+                    return idx * 10 + 100;
+                }
+            }, {
+                name: '评价数',
+                type: 'bar',
+                data: revdata,
+                animationDelay: function (idx) {
+                    return idx * 10 + 100;
+                }
+            }, {
+                name: '食品数',
+                type: 'bar',
+                data: fooddata,
+                animationDelay: function (idx) {
+                    return idx * 10 + 100;
+                }
+            }, {
+                name: '订单数',
+                type: 'bar',
+                data: orderdata,
+                animationDelay: function (idx) {
+                    return idx * 10 + 100;
+                }
+            }],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: function (idx) {
+                return idx * 5;
+            }
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        $(function () {
+
+            var myDate = new Date;
+            var year = myDate.getFullYear(); //获取当前年
+            var mon = myDate.getMonth() + 1; //获取当前月
+            var date = myDate.getDate(); //获取当前日
+            var h = myDate.getHours();//获取当前小时数(0-23)
+            var m = myDate.getMinutes();//获取当前分钟数(0-59)
+            var s = myDate.getSeconds();//获取当前秒
+            var week = myDate.getDay();
+            var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            console.log(year, mon, date, weeks[week]);
+            setInterval(function () {
+                $("#time").html(year + "年" + mon + "月" + date + "日" + weeks[week] + h + ":" + m + ":" + s);
+            }, 1000)
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>发表评论</title>
+
+		<link href="./AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="https://cdn.bootcss.com/amazeui/2.5.1/css/amazeui.css" rel="stylesheet" type="text/css" />
+
+		<link href="./css/personal.css" rel="stylesheet" type="text/css">
+		<link href="./css/appstyle.css" rel="stylesheet" type="text/css">
+		<!-- <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script> -->
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+		<script src="./js/include.js"></script>
+		<script src="./js/handlebars-v4.7.6.js"></script>
+	</head>
+
+	<body>
+		<!--头 -->
+		
+		<!--头 -->
+		<div id="header"></div>
+	
+		<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-comment">
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">发表评论</strong> / <small>Make&nbsp;Comments</small></div>
+						</div>
+						<hr/>
+
+						<div class="comment-main">
+							<div class="comment-list">
+								<div class="item-pic">
+									<a href="#" class="J_MakePoint">
+										<img src="./images/comment.jpg_400x400.jpg" class="itempic">
+									</a>
+								</div>
+
+								<div class="item-title">
+
+									<div class="item-name">
+										<a href="#">
+											<p class="item-basic-info">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+										</a>
+									</div>
+									<div class="item-info">
+										<div class="info-little">
+											<span>颜色：洛阳牡丹</span>
+											<span>包装：裸装</span>
+										</div>
+										<div class="item-price">
+											价格：<strong>19.88元</strong>
+										</div>										
+									</div>
+								</div>
+								<div class="clear"></div>
+								<div class="item-comment">
+									<textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></textarea>
+								</div>
+								<div class="filePic">
+									<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
+									<span>晒照片(0/5)</span>
+									<img src="./images/image.jpg" alt="">
+								</div>
+								<div class="item-opinion">
+									<li><i class="op1 active" data-val="好评"></i>好评</li>
+									<li><i class="op2" data-val="中评"></i>中评</li>
+									<li><i class="op3" data-val="差评"></i>差评</li>
+								</div>
+							</div>
+							
+							<!--多个商品评论-->
+							<div class="comment-list">
+								<div class="item-pic">
+									<a href="#" class="J_MakePoint">
+										<img src="./images/comment.jpg_400x400.jpg" class="itempic">
+									</a>
+								</div>
+
+								<div class="item-title">
+
+									<div class="item-name">
+										<a href="#">
+											<p class="item-basic-info">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+										</a>
+									</div>
+									<div class="item-info">
+										<div class="info-little">
+											<span>颜色：洛阳牡丹</span>
+											<span>包装：裸装</span>
+										</div>
+										<div class="item-price">
+											价格：<strong>19.88元</strong>
+										</div>
+									</div>
+								</div>
+								<div class="clear"></div>
+								<div class="item-comment">
+									<textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></textarea>
+								</div>
+								<div class="filePic">
+									<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
+									<span>晒照片(0/5)</span>
+									<img src="./images/image.jpg" alt="">
+								</div>
+								<div class="item-opinion">
+									<li><i class="op1 active" data-val="好评"></i>好评</li>
+									<li><i class="op2" data-val="中评"></i>中评</li>
+									<li><i class="op3" data-val="差评"></i>差评</li>
+								</div>
+							</div>
+							
+							<div class="comment-list">
+								<div class="item-pic">
+									<a href="#" class="J_MakePoint">
+										<img src="./images/comment.jpg_400x400.jpg" class="itempic">
+									</a>
+								</div>
+
+								<div class="item-title">
+
+									<div class="item-name">
+										<a href="#">
+											<p class="item-basic-info">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</p>
+										</a>
+									</div>
+									<div class="item-info">
+										<div class="info-little">
+											<span>颜色：洛阳牡丹</span>
+											<span>包装：裸装</span>
+										</div>
+										<div class="item-price">
+											价格：<strong>19.88元</strong>
+										</div>
+									</div>
+								</div>
+								<div class="clear"></div>
+								<div class="item-comment">
+									<textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></textarea>
+								</div>
+								<div class="filePic">
+									<input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" >
+									<span>晒照片(0/5)</span>
+									<img src="./images/image.jpg" alt="">
+								</div>
+								<div class="item-opinion">
+									<li><i class="op1 active" data-val="好评"></i>好评</li>
+									<li><i class="op2" data-val="中评"></i>中评</li>
+									<li><i class="op3" data-val="差评"></i>差评</li>
+								</div>
+							</div>							
+								<div class="info-btn">
+									<div class="am-btn am-btn-danger" onclick="su()">发表评论</div>
+								</div>							
+
+					
+												
+							
+						</div>
+
+					</div>
+
+				</div>
+				<!--底部-->
+				<div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="#">XX科技</a>
+							<b>|</b>
+							<a href="#">商城首页</a>
+							<b>|</b>
+							<a href="#">支付宝</a>
+							<b>|</b>
+							<a href="#">物流</a>
+						</p>
+					</div>
+					<div class="footer-bd">
+						<p>
+							<a href="#">关于XX</a>
+							<a href="#">合作伙伴</a>
+							<a href="#">联系我们</a>
+							<a href="#">网站地图</a>
+							<em>© 2016-2026 XXXX 版权所有 <a href="http://www.cssmoban.com/" target="_blank" title="版权所有">版权所有</a> - Collect from</em>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<aside class="menu">
+				<ul>
+					<li class="person">
+						<a href="index.html">个人中心</a>
+					</li>
+					<li class="person">
+						<a href="#">个人资料</a>
+						<ul>
+							<li> <a href="information.html">个人信息</a></li>
+							<li> <a href="safety.html">安全设置</a></li>
+							<li> <a href="address.html">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的交易</a>
+						<ul>
+							<li><a href="order.html">订单管理</a></li>
+							<li> <a href="change.html">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的资产</a>
+						<ul>
+							<li> <a href="coupon.html">优惠券 </a></li>
+							<li> <a href="bonus.html">红包</a></li>
+							<li> <a href="bill.html">账单明细</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">我的小窝</a>
+						<ul>
+							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="foot.html">足迹</a></li>
+							<li class="active"> <a href="comment.html">评价</a></li>
+							<li> <a href="news.html">消息</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
+		</div>
+
+	</body>
+	<script type="text/template" id="tbody-tr">
+		{{#each this}}
+		<div class="comment-list">
+			<div class="item-pic">
+				<a href="#" class="J_MakePoint">
+					<img src="../oUser{{foodPic}}" class="itempic">
+				</a>
+			</div>
+
+			<div class="item-title">
+
+				<div class="item-name">
+					<a href="#">
+						<p class="item-basic-info">{{foodName}}</p>
+					</a>
+				</div>
+				<div class="item-info">
+					<div class="info-little">
+						<span>颜色：默认</span>
+						<span>包装：默认</span>
+					</div>
+					<div class="item-price">
+						价格：<strong>{{foodPrice}}元</strong>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="item-comment">
+				<textarea placeholder="请写下对宝贝的感受吧，对他人帮助很大哦！"></textarea>
+			</div>
+
+			<div class="item-opinion">
+				<li><i class="op1 active" data-val="好评" data-id="{{foodId}}"></i>好评</li>
+				<li><i class="op2" data-val="中评" data-id="{{foodId}}"></i>中评</li>
+				<li><i class="op3" data-val="差评" data-id="{{foodId}}"></i>差评</li>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<style>
+		.tes{border:1px solid #0e90d2;
+			box-shadow:2px 2px 3px #aaaaaa}
+	</style>
+
+	<script type="text/javascript">
+
+
+
+
+	</script>
+	<script>
+		/**
+		 * 截取信息
+		 * */
+		function getQueryString(name) {
+			var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			return null;
+		}
+		var orderInfo=getQueryString("orderInfo");
+		/**
+		 * 提交评价
+		 *
+		 * */
+		function su(){
+			var i=1;
+			$('.comment-list').each(function () {
+				var a=$(this).find('.active').attr("data-val");
+				var c=$(this).find('.active').attr("data-Id");
+				var b=$(this).find('textarea').val();
+				if (b==''){
+					$(this).find('textarea').focus().addClass('tes')
+
+					return false;
+				}else {
+					$(this).find('textarea').removeClass('tes')
+					console.log(a+b+c);
+					$.post("../OrderServlet/updateReviews",{reviewsLv:a,reviewsInfo:b,foodId:c,orderInfo:orderInfo},function (d) {
+						if (d){
+							alert("第"+i+"个商品评价完成");
+
+						}else {
+							alert("第"+i+"个商品评价失败");
+						}
+						i++;
+					})
+					$.post("../OrderServlet/updateSen",{orderInfo:orderInfo})
+				}
+
+
+			})
+		}
+		/**
+		 * 根据获取到的orderId获取订单相关信息
+		 * @type {string | null}
+		 */
+		var orderId=getQueryString("orderId");
+		var orderInfo=getQueryString("orderInfo");
+		var tpl = $('#tbody-tr').html();
+		var template = Handlebars.compile(tpl);
+
+		$.post("../OrderServlet/FindUserOrderInfo",{orderInfo:orderInfo},function (data) {
+			$('.comment-main').html(template(data));
+			$('.comment-main').append('<div class="info-btn">\n' +
+					'\t\t\t\t\t\t\t\t\t<div class="am-btn am-btn-danger" onclick="su()">发表评论</div>\n' +
+					'\t\t\t\t\t\t\t\t</div>');
+			$(document).ready(function() {
+				$(".comment-list .item-opinion li").click(function() {
+					$(this).prevAll().children('i').removeClass("active");
+					$(this).nextAll().children('i').removeClass("active");
+					$(this).children('i').addClass("active");
+
+				});
+			});
+
+
+
+		})
+	</script>
+</html>

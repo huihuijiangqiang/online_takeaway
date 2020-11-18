@@ -1,0 +1,127 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-21 06:27:25
+ * @LastEditTime: 2020-04-21 08:42:00
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \person\person\header.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+  
+    <link rel="stylesheet" href="./css/buycarcommon copy.css">
+    <link rel="stylesheet" href="./js/jquery.min.js">
+    <script src="js/json3.js"></script>
+    <title>Title</title>
+    <script>
+        $(function () {
+            $.get("../UserServlet/finUserName",function (data) {
+                if (data==null){
+                    location.href='login.html';
+                    $("#quit").hide();
+                    $("#regiseter").show();
+                }else {
+                    console.log(data);
+                    $("#quit").show();
+                    $("#regiseter").hide();
+                    var userId=data.userId;
+                    $('#a_username').html(data.userName);
+                    $('#userIdd').html(data.userId);
+                    $('#userIdd').hide();
+                    //将数据存储到本地 方便其他页面调用
+                    $.get("../UserServlet/getUserInfo",{userId:userId},function (data) {
+                        //将数据转为字符串
+                        var obj = JSON.parse(data);
+                        //字符串存储到本地
+                        var s=window.localStorage;
+                        //移除已存储得
+                        s.removeItem("UserInfo");
+                        //添加新的
+                        s["UserInfo"]=data;
+                    })
+                }
+            });
+
+        })
+        function quit() {
+            //退出 清除本地存储的信息
+            var s=window.localStorage;
+            s.removeItem("UserInfo");
+        }
+    </script>
+</head>
+
+<body>
+    <!--头 -->
+    <header>
+        <article>
+            <div class="mt-logo">
+                <!--顶部导航条 -->
+                <div class="shortcut">
+                    <div class="w">
+                        <div class="fl">
+                            <ul>
+                                <li>XX外卖欢迎您！ </li>
+                                <li>
+                                    <a href="login.html" id="a_username">请登录</a>
+                                    <a href="../UserServlet/UserQuit"  id="quit" onclick="quit()">退出登录</a>
+                                    <a href="javascript:;"  id="userIdd"></a>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="fr">
+                            <ul>
+                                <li><a href="#">我的订单</a></li>
+                                <li class="spacer"></li>
+                                <li>
+                                    <a href="#">我的外卖</a>
+        
+                                </li>
+                                <li class="spacer"></li>
+                                <li><a href="#">XX外卖会员</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#">企业采购</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#">关注我们</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#">客户服务</a> </li>
+                                <li class="spacer"></li>
+                                <li><a href="#">网站导航</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--悬浮搜索框-->
+
+                <div class="nav white">
+                    <div class="logoBig">
+                        <li><img src="" /></li>
+                    </div>
+
+                    <div class="search-bar pr">
+                        <a name="index_none_header_sysc" href="#"></a>
+                        <form>
+                            <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索"
+                                autocomplete="off">
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            </div>
+        </article>
+    </header>
+
+
+
+    <hr>
+</body>
+
+</html>

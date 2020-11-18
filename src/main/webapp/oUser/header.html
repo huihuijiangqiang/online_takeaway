@@ -1,0 +1,110 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-21 06:27:25
+ * @LastEditTime: 2020-04-21 08:10:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \person\person\header.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/amazeui/2.5.1/css/amazeui.css" rel="stylesheet" type="text/css" />
+    <link href="./statci/css/personal.css" rel="stylesheet" type="text/css">
+<!--    <link rel="stylesheet" href="./statci/css/buycarcommon.css">-->
+
+    <title>Title</title>
+    <script>
+        $(function () {
+            $.get("../UserServlet/finUserName",function (data) {
+                if (data==null){
+                    location.href='./statci/login.html';
+                    $("#quit").hide();
+                    $("#regiseter").show();
+                }else {
+                    console.log(data);
+                    $("#quit").show();
+                    $("#regiseter").hide();
+                    $('#a_username').html(data.userName);
+                    $('#userIdd').html(data.userId);
+                    $('#userIdd').hide();
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <!--头 -->
+    <header>
+        <article>
+            <div class="mt-logo">
+                <!--顶部导航条 -->
+                <div class="shortcut">
+                    <div class="w">
+                        <div class="fl">
+                            <ul>
+                                <li>XX外卖欢迎您！ </li>
+                                <li>
+                                    <a href="./statci/login.html" id="a_username">请登录</a>
+                                    <a href="register.html" class="style-red" id="regiseter">免费注册</a>
+                                    <a href="../UserServlet/UserQuit"  id="quit">退出登录</a>
+                                    <a href="javascript:;"  id="userIdd"></a>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="fr">
+                            <ul>
+                                <li><a href="#">我的订单</a></li>
+                                <li class="spacer"></li>
+                                <li>
+                                    <a href="#">我的外卖</a>
+        
+                                </li>
+                                <li class="spacer"></li>
+                                <li><a href="#">XX外卖会员</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#">企业采购</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#">关注我们</a></li>
+                                <li class="spacer"></li>
+                                <li><a href="#">客户服务</a> </li>
+                                <li class="spacer"></li>
+                                <li><a href="#">网站导航</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--悬浮搜索框-->
+
+                <div class="nav white">
+                    <div class="logoBig">
+                        <li><img src="" /></li>
+                    </div>
+
+                    <div class="search-bar pr">
+                        <a name="index_none_header_sysc" href="#"></a>
+                        <form>
+                            <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索"
+                                autocomplete="off">
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            </div>
+        </article>
+    </header>
+
+
+
+    <hr>
+</body>
+
+</html>

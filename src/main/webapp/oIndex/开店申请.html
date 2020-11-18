@@ -1,0 +1,356 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-04-03 16:30:54
+ * @LastEditTime: 2020-04-06 09:14:15
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \网上订餐系统\首页\开店申请.html
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开放平台</title>
+    <!-- jquery  -->
+    <script src="./statci/js/jquery.min.js"></script>
+    <!-- Bootstrap css文件 -->
+    <link rel="stylesheet" href="./statci/css/bootstrap.css">
+    <!-- title图片 -->
+    <link rel="shortcut icon" href="./statci//img/购物车 (1).png" />　
+    <!-- 瀑布流css -->
+    <link rel="stylesheet" href="./statci//css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Hind:400,600|Open+Sans:300,600" rel="stylesheet">
+    <!-- 瀑布流css -->
+    <link rel="stylesheet" href="./statci//dist/sortable.min.css">
+    <!-- 首页部分css -->
+    <link rel="stylesheet" href="./statci//css/first.css">
+    <script type="text/javascript" src="./statci//dist/sortable.min.js"></script>
+    <style>
+        .flow,
+        .flow1,
+        .flow2 {
+            width: 100%;
+            height: 414px;
+            background-color: #f5f5f5;
+            /* border-top:54px ; */
+            /* margin-top: 54px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+
+
+        .flow1 {
+            margin-top: 0px;
+            background-color: #fff;
+        }
+
+        .flow2 {
+            margin-top: 0px;
+        }
+
+        body {
+            height: 1000px;
+        }
+
+        .flow-step-content {
+            display: flex;
+        }
+
+        /* .flow-step {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            float: left;
+            display: flex;
+        } */
+
+        .step1 {
+            background: #ffd161;
+            width: 60px;
+            line-height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin: auto;
+        }
+        .step2 {
+           width: 40px;
+           margin: auto;
+        }
+
+        .step-title {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .step-detail {
+            font-size: 14px;
+            color: #333;
+            margin-top: 6px;
+            text-align: center;
+            width: 210px;
+        }
+
+        .flow-arrow {
+            width: 24px;
+            background-image: url(./statci/img/NEXT.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: 50%;
+            height: 60px;
+            margin-top: 62px;
+        }
+
+        .title {
+            margin-top: -35px;
+            margin-bottom: 69px;
+        }
+        .flow1-step{
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .flow-step{
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .dd{height: 70px;}
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <nav class="navbar navbar-fixed-top  navbar-inverse my-navbar">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand my-navbar-brand" href="#">
+                        XX网上订餐系统</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" id="my-c">
+                        <li><a href="./index.html">首页 <span class="sr-only">(current)</span></a></li>
+
+                        <li class="active"><a href="javascript:;">开店流程</a></li>
+                        <li><a href="javascript:;">开店要求</a></li>
+                        <li><a href="javascript:;">开店帮助</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="../oBusiness/register.html"><button type="button" class="btn btn-warning">申请开店</button></a></li>
+
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+    </div>
+    <div class="dd"></div>
+    <!-- 开店流程 -->
+    <div class="flow text-center" id="flow">
+
+        <div class="flow-content text-center">
+            <h1 class="title">开店流程</h1>
+            <div class="flow-step-content">
+                <div class="flow-step">
+                    <div class="step bold step1">
+                        1
+                    </div>
+                    <div class="step-title bold">
+                        提交资料
+                    </div>
+
+                    <p class="step-detail">
+                        填写店铺信息，提交经营资质照片
+                    </p>
+
+                    <p class="step-detail">
+                        填写您的收款信息，方便开店后快速提现
+                    </p>
+
+                </div>
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <div class="step bold step1">
+                        2
+                    </div>
+                    <div class="step-title bold">
+                        审核签约
+                    </div>
+
+                    <p class="step-detail">
+                        等待资质审核（1-3个工作日）
+                    </p>
+
+                    <p class="step-detail">
+                        审核通过，短信签约
+                    </p>
+
+                </div>
+                <div class="flow-arrow"></div>
+
+                <div class="flow-step">
+                    <div class="step bold step1">
+                        3
+                    </div>
+                    <div class="step-title bold">
+                        开门营业
+                    </div>
+
+                    <p class="step-detail">
+                        录入商品
+                    </p>
+
+                    <p class="step-detail">
+                        业务经理到店线下审核，审核通过即可开门营业
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 开店要求 -->
+    <div class="flow1 text-center" id="flow1">
+
+        <div class="flow-content text-center">
+            <h1 class="title">开店要求</h1>
+            <div class="flow-step-content">
+                <div class="flow1-step">
+                    <div class="step bold step2">
+                        <img src="./statci/img/门店.png" alt="">
+                    </div>
+                    <h3>有实体门店</h3>
+
+                    <p class="step-detail">
+                        入驻xx外卖平台前，需有线下实体店铺；
+                    </p>
+
+
+
+                </div>
+                
+
+                <div class="flow1-step">
+                    <div class="step bold step2">
+                        <img src="./statci/img/营业执照.png" alt="">
+                    </div>
+                    <h3>有经营资质</h3>
+
+                    <p class="step-detail">
+                        申请开店过程中需要您提供符合国家法律规定的经营许可证照，包括但不限于营业执照、各类许可证、特许证件等；
+
+                        品类范围
+
+
+                    </p>
+
+                </div>
+                
+
+                <div class="flow1-step">
+                    <div class="step bold step2">
+                        <img src="./statci/img/类目 品类 分类 类别.2.png" alt="">
+                    </div>
+                    <h3>品类范围</h3>
+
+                    <p class="step-detail">
+                        美团外卖支持以下经营项目
+
+                        美食
+                        甜点饮品
+                        鲜花绿植
+                        生活超市
+                        生鲜果蔬
+                        医药健康
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 开店帮助 -->
+    <div class="flow2 text-center" id="flow1">
+
+        <h1>开店帮助</h1>
+    </div>
+    <!-- 申请开店 -->
+    <div class="footer-container text-center">
+        <h1>XX网上订餐系统期待您的加入</h1>
+        <a href="../oBusiness/register.html"><button type="button" class="btn btn-warning my-btn">申请开店</button></a>
+    </div>
+
+    <!-- 返回顶部 -->
+    <div class="back">
+        <img src="./statci/img/返回顶部 (4).png" alt="">
+    </div>
+    <!-- Bootstrap js文件 -->
+    <script src="./statci/js/bootstrap.js"></script>
+    <script>
+        $(function () {
+            var boxTop = $('.flow1').offset().top-75;
+            var boxTop1 = $('.flow2').offset().top-75;
+            // console.log(boxTop);
+            // console.log(boxTop1);
+            
+            // ;
+            $(window).scroll(function () {
+                // console.log($(document).scrollTop());
+                if ($(document).scrollTop() >= boxTop && $(document).scrollTop() < boxTop1) {
+                    $(".back").fadeIn();
+                    $("#my-c li:eq(2)").addClass('active').siblings('li').removeClass('active');
+                } else if ($(document).scrollTop() >= boxTop1) {
+                    $("#my-c li:eq(3)").addClass('active').siblings('li').removeClass('active');
+                } else {
+                    $(".back").fadeOut();
+                    $("#my-c li:eq(1)").addClass('active').siblings('li').removeClass('active');
+                }
+            })
+            $("#my-c li:eq(1)").click(function () {
+                $("body, html").stop().animate({
+                    scrollTop: 0
+                })
+            })
+            $("#my-c li:eq(2)").click(function () {
+                $("body, html").stop().animate({
+                    scrollTop: boxTop
+                })
+            })
+            $("#my-c li:eq(3)").click(function () {
+                $("body, html").stop().animate({
+                    scrollTop: boxTop1
+                })
+            })
+            $(".back").click(function () {
+                // $(document).scrollTop(0);
+                $("body, html").stop().animate({
+                    scrollTop: 0
+                });
+
+            })
+        })
+    </script>
+</body>
+
+</html>
